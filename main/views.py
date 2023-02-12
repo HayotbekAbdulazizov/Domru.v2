@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Post, PostImages
+from .models import Post
 from django.views.generic import View, DetailView, ListView
 import json
 
@@ -290,7 +290,8 @@ class PostDetailView(View):
         post = Post.objects.get(id=pk)
         context = {
             "object":post,
-            "images":PostImages.objects.filter(post=post)
+            "images": post.imagesProp,
+            # "images":PostImages.objects.filter(post=post)
         }
         # Post.objects.all().delete()
         # PostImages.objects.all().delete()

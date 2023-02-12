@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from main.models import Post, PostImages
+from main.models import Post
 from .serializers import PostSerializer
 
 from django.shortcuts import get_object_or_404
@@ -54,28 +54,30 @@ class PostApiView(GenericAPIView, CreateModelMixin):
 
 
 		post = Post.objects.update_or_create(offerId=offerId, defaults={
-		"title":title,
-		"slug":slug,
-		"category" :category,
-		"price":price,
-		"priceCurrency":priceCurrency,
-		"pricePerMeter":pricePerMeter,
-		"city":city,
-		"address":аddress,
-		"description":description,
-		"offerId":offerId,
-		"contacts":contacts,
-		"body":body,
-		"source":source
+			"title":title,
+			"slug":slug,
+			"category" :category,
+			"price":price,
+			"priceCurrency":priceCurrency,
+			"pricePerMeter":pricePerMeter,
+			"city":city,
+			"address":аddress,
+			"description":description,
+			"offerId":offerId,
+			"contacts":contacts,
+			"body":body,
+			"source":source,
+			"ImagesProp": images_list,
+			"preview":images_list[0],
 		})
 
 		print(post[1])
 		
 		serializer = PostSerializer(post)
 
-		if post[1] == True and request.data['images']:
-			for image in images_list:
-				PostImages.objects.create(post=post[0], url=image)
+		# if post[1] == True and request.data['images']:
+		# 	for image in images_list:
+		# 		PostImages.objects.create(post=post[0], url=image)
 
 
 
@@ -133,6 +135,10 @@ class PostContactGetView(GenericAPIView):
 
 
 
+
+
+
+
 class PostContactDetailApiView(GenericAPIView):
 	serializer_class = PostSerializer
 	queryset = Post.objects.all()
@@ -154,17 +160,22 @@ class PostContactDetailApiView(GenericAPIView):
 		post = Post.objects.get(id=pk)
 		serializer = PostSerializer(post)
 		
-		post_images = post.images.all()
+		# post_images = post.images.all()
 
 		# Previous Images Deletion
 		if request.data['imagesStatus']:
-			for i in post_images:
-				i.delete()
+			post.imagesProp = request.data['images']
+
+
+
+
+			# for i in post_images:
+			# 	i.delete()
 				
-			for i in request.data['images']:
-				print('NEW Image: ',i)
-				post_image = post.images.create(post=post, url=i).save()
-				print(post_image)
+			# for i in request.data['images']:
+			# 	print('NEW Image: ',i)
+			# 	post_image = post.images.create(post=post, url=i).save()
+			# 	print(post_image)
 
 
 		#   bodyHtml = post.body + request.data['contact']
@@ -177,6 +188,20 @@ class PostContactDetailApiView(GenericAPIView):
 		post.save()
 
 		return Response(serializer.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

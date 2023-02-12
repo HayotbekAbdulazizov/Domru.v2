@@ -22,10 +22,18 @@ class Post(models.Model):
 	contact_body = RichTextField("ContactBody" , blank=True, null=True)
 	published = models.DateTimeField(auto_now_add=True)
 	source = models.URLField(max_length=200, blank=True)
+	preview = models.URLField(max_length=300, blank=True, default="https://s.backendservices.ru/j/nq3BrPnwpXoil3BTdzdtu9Qy.658f34c2/dom/p/71/08/710883/ad1ff5a3fa.jpg")
+	imagesProp = False
 
 
 	def __str__(self):
 		return f"{self.title}"
+
+
+	# def __init__(self):
+	# 	super().__init__()
+	# 	self.imagesProp = False
+
 
 	class Meta:
 		ordering = ["-published",]
@@ -36,13 +44,13 @@ class Post(models.Model):
 
 
 
-class PostImages(models.Model):
-	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images",blank=True, null=True)
-	image = models.ImageField(upload_to=None, height_field=None, blank=True, null=True)
-	url = models.URLField("Image url", max_length=400, blank=True, null=True)
+# class PostImages(models.Model):
+# 	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images",blank=True, null=True)
+# 	image = models.ImageField(upload_to=None, height_field=None, blank=True, null=True)
+# 	url = models.URLField("Image url", max_length=400, blank=True, null=True)
 
-	def __str__(self):
-		return self.post.title
+# 	def __str__(self):
+# 		return self.post.title
 
 
 

@@ -1,17 +1,17 @@
 from django.contrib import admin
-from .models import Post, PostImages
+from .models import Post
 
 
 
-class PostImageItem(admin.StackedInline):
-    model = PostImages
-    extra = 5
+# class PostImageItem(admin.StackedInline):
+#     model = PostImages
+#     extra = 5
 
 
 #  Registering main Post model
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-	inlines = [PostImageItem]
+	# inlines = [PostImageItem]
 	list_display = ['title', "contacts",'id']
 	list_display_links = ['title', 'id' ]
 	prepopulated_fields = {'slug':('title',)}
@@ -19,4 +19,4 @@ class PostAdmin(admin.ModelAdmin):
 
 	
 
-admin.site.register(PostImages)
+# admin.site.register(PostImages)

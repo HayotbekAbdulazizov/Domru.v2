@@ -17,11 +17,8 @@
     <div class="row no-gutters">
       <div class="col-md-4">
 
-        {% if post.images.all.count %}
-        <img src="{{post.images.first.url}}" class="card-img post-img" alt="..." >
-        {% else %}
-        <img class="post-img card-img" src="https://s.backendservices.ru/j/nq3BrPnwpXoil3BTdzdtu9Qy.658f34c2/dom/p/71/08/710883/ad1ff5a3fa.jpg" alt="">
-        {% endif %}
+          <!-- <img src="{{post.images.first.url}}" class="card-img post-img" alt="..." > -->
+          <img src="{{post.preview}}" class="card-img post-img" alt="..." >
 
       </div>
       <div class="col-md-8">

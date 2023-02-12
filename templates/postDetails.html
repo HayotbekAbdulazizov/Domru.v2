@@ -21,9 +21,16 @@
   <div class="row">
     <div class="large-12 columns">
       <div class="owl-carousel owl-theme">
-        {% for image in object.images.all %}
-          <img class="item post-image"  src="{{image.url}}" alt="" srcset="">
-        {% endfor %}
+        
+        {% if object.imagesProp %}
+          {% for image in object.imagesProp %}
+            <img class="item post-image"  src="{{image}}" alt="" srcset="">
+          {% endfor %}
+  
+        {% else %}
+            <img class="item post-image"  src="{{object.preview}}" alt="" srcset="">
+        {% endif %}
+          
       </div>
       </div>
   </div>
