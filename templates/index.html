@@ -1,0 +1,200 @@
+{% extends 'wrapper.html' %}
+
+
+
+
+{% block content %}
+
+<div class="w-100" style="display:flex;justify-content:center;flex-direction: column;">
+    <h3> Количество Постов - {{all_posts_count}} </h3> <br>
+    <h3> Имеються контакты - {{with_contacts}} </h3>
+</div>
+
+{% for post in object_list %}
+
+
+<div class="card mb-3 offset-md-2 col-md-9">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+
+        {% if post.images.all.count %}
+        <img src="{{post.images.first.url}}" class="card-img post-img" alt="..." >
+        {% else %}
+        <img class="post-img card-img" src="https://s.backendservices.ru/j/nq3BrPnwpXoil3BTdzdtu9Qy.658f34c2/dom/p/71/08/710883/ad1ff5a3fa.jpg" alt="">
+        {% endif %}
+
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <a class="post-title" href="{% url 'main:post_details' post.id %}"><h6 class="card-title "> {{post.title}}</h6></a>
+          <p class="card-text"> <span class="font-weight-bold">{{post.price}}</span>  <span class="post-price-cur">{{post.priceCurrency}}      </span>    {{post.pricePerMeter}}  <span style="padding-left: 20px;"></span> </p>
+          <p class="card-text"> {{post.address}} </p>
+          <!--<p class="card-text"><small class="text-muted">  post.description|truncatewords:25}}</small> </p>-->
+          <p class="card-text"><small class="text-muted">{{post.contact_body | safe}}</small> </p>
+          <p class="card-text"><small class="text-muted">{{post.offerId}}</small> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- <div class="card">
+    <div class="row no-gutters">
+        <div class="col-sm-12 col-md-4 col-lg-4 post-image" >
+            <img class="card-img img-fluid w-100 h-100" style="object-fit: cover;" src="https://smartwebgate.com/wp-content/uploads/2021/10/AdobeStock_126016889.jpeg" alt="Suresh Dasari Card">
+        </div>
+        <div class="col-sm-7 col-md-7 col-lg-7">
+            <div class="card-body">
+                <h5 class="card-title">Suresh Dasari</h5>
+                <p class="card-text">Suresh Dasari is a founder and technical lead developer in tutlane.</p>
+                <a href="#" class="btn btn-primary">View Profile</a>
+            </div>
+        </div>
+    </div>
+</div>  -->
+
+
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+<div class='pagination justify-content-center' style="padding-bottom: 40px;">
+  {% if page_obj.has_previous %}
+    <a href='{% url "main:home" %}?page={{ page_obj.previous_page_number }}'>Previous </a>
+  {% endif %}
+
+  <span class='mx-4'>
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  </span>
+
+  {% if page_obj.has_next %}
+    <a href='{% url "main:home" %}?page={{ page_obj.next_page_number }}' > Next</a>
+  {% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+    .owl-prev, .owl-next{
+        transform: scale(2);
+    }
+    .item{
+        padding: 0% !important;
+    }
+
+    .post-title{
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .post-price-cur{
+      font-size: 12px;
+    }
+    .post-img{
+      /* height:250px; */
+      max-height: 250px;
+      object-fit: cover;
+    }
+
+
+    /* default styles here for older browsers.
+   I tend to go for a 600px - 960px width max but using percentages
+*/
+@media only screen and (min-width: 960px) {
+    /* styles for browsers larger than 960px; */
+    .item{
+        padding: 0 !important;
+        height: 400px !important;
+    }
+
+}
+@media only screen and (min-width: 1440px) {
+    /* styles for browsers larger than 1440px; */
+    .card-img{
+        /* width: 300px;
+        height: 225px;
+        border-radius: 10px; */
+    }
+}
+
+
+@media only screen and (min-width: 2000px) {
+    /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width: 480px) {
+   /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+
+
+@media only screen and (device-width: 768px) {
+   /* default iPad screens */
+}
+
+
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only */
+  /* .item{
+        padding: 0 !important;
+        height: 300px !important;
+    } */
+    .post-image{
+        width: 300px;
+        height: 225px;
+    }
+
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only */
+    .post-image{
+        width: 300px;
+        height: 225px;
+    }
+    body{
+        background-color: red;
+    }
+
+
+}
+</style>
+
+
+
+
+{% endblock content %}

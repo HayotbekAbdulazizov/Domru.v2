@@ -1,0 +1,224 @@
+{% extends 'wrapper.html' %}
+
+
+
+
+{% block content %}
+
+
+<!-- <div class="splide">
+  <div class="splide__track">
+		<ul class="splide__list">
+			<li class="splide__slide" style="width: 150px">Slide 01</li>
+			<li class="splide__slide" style="width: 250px">Slide 02</li>
+			<li class="splide__slide" style="width: 200px">Slide 03</li>
+		</ul>
+  </div>
+</div> -->
+<div class="container">
+
+<section id="demos">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="owl-carousel owl-theme">
+        {% for image in object.images.all %}
+          <img class="item post-image"  src="{{image.url}}" alt="" srcset="">
+        {% endfor %}
+      </div>
+      </div>
+  </div>
+</section>
+
+
+
+  <h4> {{ object.title}}</h4>
+          <p class="card-text"> <span class="font-weight-bold">{{object.price}}</span>  <span class="post-price-cur">{{object.priceCurrency}}      </span>    {{object.pricePerMeter}}  <span style="padding-left: 20px;"></span> </p>
+
+  <p class="offerAddress">{{object.address}} </p>
+  <p class="offerAddress">{{object.published}} </p>
+  <a href="{{object.source}}">Оригинал</a>
+
+  <br>
+  <br>
+
+
+
+    {{object.contact_body | safe}}
+  {{object.body | safe}}
+  <!-- {{object.description}} -->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function() {
+    $('.owl-carousel').owlCarousel({
+      margin: 10,
+      loop: true,
+      autoWidth: true,
+      items: 4,
+      nav:true,
+    })
+  })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .post-image{
+    width: auto;
+    object-fit: cover !important;
+  }
+  .owl-prev, .owl-next{
+      transform: scale(2);
+  }
+  .item{
+      padding: 0% !important;
+      /* border-color: white; */
+      border: 1px solid white;
+  }
+
+  .row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  span{
+    font-size: 1.1rem;
+    color: black;
+  }
+
+  .contacts-header{
+    font-size: 20px !important;
+    font-weight: 600;
+  }
+
+  .contacts-pb, .link-primary{
+    margin-left: 20px;
+  }
+
+  .description, .table-category, .contacts-pb, .contacts-header, .offerNear, .offerStatus{
+    margin-top: 20px;
+  }
+  .owl-nav, .owl-dots { display: block !important; }
+
+  .offerAddress{
+    margin-left: 5px;
+  }
+
+
+  /* default styles here for older browsers.
+ I tend to go for a 600px - 960px width max but using percentages
+*/
+@media only screen and (min-width: 960px) {
+  /* styles for browsers larger than 960px; */
+  .item{
+      padding: 0 !important;
+      height: 300px !important;
+  }
+
+}
+@media only screen and (min-width: 1440px) {
+  /* styles for browsers larger than 1440px; */
+}
+@media only screen and (min-width: 2000px) {
+  /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width: 480px) {
+ /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width: 768px) {
+ /* default iPad screens */
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+/* For portrait layouts only */
+/* .item{
+      padding: 0 !important;
+      height: 300px !important;
+  } */
+
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+/* For landscape layouts only */
+.item{
+      padding: 0 !important;
+      height: 300px !important;
+  }
+
+}
+
+.owl-item ,.active{
+  margin: 0 !important;
+}
+
+</style>
+
+
+
+
+
+
+
+{% endblock content %}
