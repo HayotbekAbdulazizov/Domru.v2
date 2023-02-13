@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from main.models import Post
 from .serializers import PostSerializer
+from django.http import HttpResponse
 
 from django.shortcuts import get_object_or_404
 # generic view
@@ -49,9 +50,13 @@ class PostApiView(GenericAPIView, CreateModelMixin):
 		contacts = request.data['contacts']
 		body = request.data['body']
 		source = request.data['source']
-		images_list = json.loads(request.data['images'])
+		# images_list = json.loads(request.data['images'])
+		images_list = request.data['images']
+		preview = request.data['preview']
+		
 
-
+		print(images_list)
+		print(type(images_list))
 
 		post = Post.objects.update_or_create(offerId=offerId, defaults={
 			"title":title,
@@ -67,22 +72,18 @@ class PostApiView(GenericAPIView, CreateModelMixin):
 			"contacts":contacts,
 			"body":body,
 			"source":source,
-			"ImagesProp": images_list,
-			"preview":images_list[0],
+			"preview":preview,
+			"images": images_list
 		})
-
+		
+		print("=== Creating post in api section ===")
 		print(post[1])
 		
 		serializer = PostSerializer(post)
 
-		# if post[1] == True and request.data['images']:
-		# 	for image in images_list:
-		# 		PostImages.objects.create(post=post[0], url=image)
-
-
 
 		return Response(serializer.data)
-
+		# return HttpResponse(200)
 
 
 
@@ -211,10 +212,25 @@ class PostContactDetailApiView(GenericAPIView):
 class PostDeleteApiView(GenericAPIView):
 	def get(self,request):
 		for i in Post.objects.all():
+			print("=== Post deleting === : ", i.id)
 			i.delete()
 
-		return True
+		return HttpResponse(200)
 
 
 
 
+
+import time
+
+class PostContactFalse(GenericAPIView):
+	def get(self, request):
+		posts = Post.objects.filter(contacts=True)
+		print(len(posts))
+		for i in posts:
+			i.contacts = False
+			i.contact_body = ""
+			i.save()
+			time.sleep(0.3)
+			print("==== CONTACTS ARE ALL FALSE ====")
+		return HttpResponse(200)

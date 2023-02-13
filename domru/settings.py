@@ -27,8 +27,8 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ["http://abdulazizovdev.pythonanywhere.com", "abdulazizovdev.pythonanywhere.com"]
 # ALLOWED_HOSTS = ["192.168.100.255", "http://192.168.100.255", "http://192.168.100.255:8080"]
-# ALLOWED_HOSTS = ['192.168.100.41']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.100.41']
+#ALLOWED_HOSTS = []
 
 
 

@@ -290,7 +290,6 @@ class PostDetailView(View):
         post = Post.objects.get(id=pk)
         context = {
             "object":post,
-            "images": post.imagesProp,
             # "images":PostImages.objects.filter(post=post)
         }
         # Post.objects.all().delete()

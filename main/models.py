@@ -1,8 +1,14 @@
 # from tinymce.models import HTMLField
 from django.db import models
 from ckeditor.fields import RichTextField
-
+import json
 # Create your models here.
+
+
+
+
+
+
 
 
 
@@ -23,22 +29,24 @@ class Post(models.Model):
 	published = models.DateTimeField(auto_now_add=True)
 	source = models.URLField(max_length=200, blank=True)
 	preview = models.URLField(max_length=300, blank=True, default="https://s.backendservices.ru/j/nq3BrPnwpXoil3BTdzdtu9Qy.658f34c2/dom/p/71/08/710883/ad1ff5a3fa.jpg")
-	imagesProp = False
-
+	images = models.TextField("Images", blank=True, null=True )
+	
 
 	def __str__(self):
 		return f"{self.title}"
 
 
-	# def __init__(self):
-	# 	super().__init__()
-	# 	self.imagesProp = False
+	def set_images(self, images_list):
+		self.images = json.dumps(images_list)
+
+
+	def get_images(self):
+		return json.loads(self.images)
 
 
 	class Meta:
 		ordering = ["-published",]
 		verbose_name_plural = 'Posts'
-
 
 
 
@@ -65,3 +73,24 @@ class Contact(models.Model):
 
 	def __str__(self):
 		return self.post_id.title
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		#self,title, slug,category, price,priceCurrency,pricePerMeter,city,address,description,offerId,contacts,body,source,preview

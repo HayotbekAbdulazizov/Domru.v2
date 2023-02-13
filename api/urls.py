@@ -14,4 +14,5 @@ urlpatterns = [
     path('post/contact2/', views.PostContactGetView.as_view(), name='postContactGetView'),
     path('post/contact/<pk>', views.PostContactDetailApiView.as_view(), name='postContactDetailView'),
     path('post/delete', views.PostDeleteApiView.as_view(), name='postDeleteView'),
+    path('post/nocontact', views.PostContactFalse.as_view(), name='PostContactFalse'),
 ]

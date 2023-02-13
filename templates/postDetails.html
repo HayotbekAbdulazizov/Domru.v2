@@ -22,14 +22,14 @@
     <div class="large-12 columns">
       <div class="owl-carousel owl-theme">
         
-        {% if object.imagesProp %}
-          {% for image in object.imagesProp %}
+        <!--  if object.imagesProp %} -->
+          {% for image in object.get_images %}
             <img class="item post-image"  src="{{image}}" alt="" srcset="">
           {% endfor %}
   
-        {% else %}
+       <!--  else %}
             <img class="item post-image"  src="{{object.preview}}" alt="" srcset="">
-        {% endif %}
+         endif %} -->
           
       </div>
       </div>
